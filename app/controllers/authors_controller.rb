@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  # before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :set_author, only: [:show, :edit, :update, :destroy]
 
   # GET /authors
   # GET /authors.json
@@ -7,16 +7,16 @@ class AuthorsController < ApplicationController
     @authors = Author.all
   end
 
-  # before_action :require_login, except: [:new, :create]
+  before_action :require_login, except: [:new, :create]
   #show the authors account creation page if there is no registered author yet so that only registered author can authorize others
-    # before_action :zero_authors_or_authenticated, only: [:new, :create]
+    before_action :zero_authors_or_authenticated, only: [:new, :create]
 
-# def zero_authors_or_authenticated
-#   unless Author.count == 0 || current_user
-#     redirect_to root_path
-#     return false
-#   end
-# end
+def zero_authors_or_authenticated
+  unless Author.count == 0 || current_user
+    redirect_to root_path
+    return false
+  end
+end
 
   # GET /authors/1
   # GET /authors/1.json
